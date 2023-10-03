@@ -10,5 +10,6 @@ const channels = import.meta.globEager('./**/*_channel.js')
 
 import "../controllers"
 
+import "~/index.css"
 // Example: Import a stylesheet in app/frontend/index.css
 // import '~/index.css'
