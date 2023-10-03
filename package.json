@@ -2,15 +2,15 @@
   "name": "app",
   "private": "true",
   "dependencies": {
-    "@hotwired/stimulus": "^3.2.2",
+    "@hotwired/stimulus": "npm:@hotwired/stimulus",
     "@hotwired/turbo-rails": "^7.3.0",
     "@rails/actioncable": "^7.0.1",
     "@rails/actiontext": "^7.0.1",
     "@rails/activestorage": "^7.0.1",
-    "@rails/request.js": "^0.0.6"
+    "@rails/request.js": "^0.0.6",
+    "stimulus_reflex": "^3.5.0-rc2"
   },
-  "scripts": {
-  },
+  "scripts": {},
   "devDependencies": {
     "@tailwindcss/aspect-ratio": "^0.4.2",
     "@tailwindcss/typography": "^0.5.9",
