@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
   def index
-    @count ||= 0
+    render Home::IndexView.new
   end
 end

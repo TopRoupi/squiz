@@ -5,6 +5,9 @@ module.exports = {
   content: [
     './app/**/*.html.erb',
     './config/initializers/*.rb',
+    './app/views/components/*.rb',
+    './app/views/components/**/*.rb',
+    './app/views/components/**/**/*.rb',
     './app/components/**/*.rb',
     './app/components/**/**/*.rb',
     './app/components/**/**/**/*.rb',

@@ -44,3 +44,5 @@ group :test do
 end
 
 gem "rspotify", "~> 2.12"
+
+gem "kredis", "~> 1.5"

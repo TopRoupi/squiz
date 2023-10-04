@@ -312,6 +312,11 @@ cssesc@^3.0.0:
   resolved "https://registry.yarnpkg.com/cssesc/-/cssesc-3.0.0.tgz#37741919903b868565e1c09ea747445cd18983ee"
   integrity sha512-/Tb/JcjK111nNScGob5MNtsntNM1aCNUDipB/TkwZFhyDrrE47SOx/18wF2bbjgc3ZzCSKW1T5nt5EbFoAz/Vg==
 
+debounced@^0.0.5:
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/debounced/-/debounced-0.0.5.tgz#e540b6eebfe703d93462711b4f3562ffd101b87f"
+  integrity sha512-8Bgheu1YxQB7ocqYmK2enbLGVoo4nCtu/V6UD/SMDOeV3g2LocG2CrA5oxudlyl79Ja07UiqGdp9pWZoJn52EQ==
+
 debug@^4.3.4:
   version "4.3.4"
   resolved "https://registry.yarnpkg.com/debug/-/debug-4.3.4.tgz#1319f6579357f2338d3337d2cdd4914bb5dcc865"
