@@ -16,6 +16,7 @@ gem "jbuilder"
 gem "redis", "~> 4.0"
 gem "stimulus_reflex", "= 3.5.0.rc3"
 gem "phlex-rails", "~> 1.0"
+gem "rspotify", "~> 2.12"
 
 gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
 gem "bootsnap", require: false
@@ -42,7 +43,3 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
-
-gem "rspotify", "~> 2.12"
-
-gem "kredis", "~> 1.5"

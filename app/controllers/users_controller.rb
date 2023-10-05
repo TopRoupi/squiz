@@ -3,15 +3,14 @@ class UsersController < ApplicationController
     if session[:user_id].nil?
       render Users::RegisterView.new
     else
-      redirect_to(:root) 
+      redirect_to(:root)
     end
   end
 
   def setup
     if session[:user_id].nil?
-      session[:user_id] = SecureRandom.base64(40)
-      users = Kredis.hash "users"
-      users.update(session[:user_id] => params[:username])
+      new_user = User.create(name: params[:username])
+      session[:user_id] = new_user.id
     end
     redirect_to :root
   end
