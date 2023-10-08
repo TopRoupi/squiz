@@ -3,7 +3,7 @@ class UsersController < ApplicationController
     if session[:user_id].nil?
       render Users::RegisterView.new
     else
-      redirect_to(:root)
+      redirect_to :root
     end
   end
 

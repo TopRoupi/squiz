@@ -18,7 +18,7 @@ class ApplicationLayout < ApplicationView
         unsafe_raw helpers.vite_javascript_tag("application")
       end
 
-      body do
+      body class: "p-10" do
         main(&block)
       end
     end

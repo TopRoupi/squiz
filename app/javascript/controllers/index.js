@@ -8,7 +8,9 @@ import debounced from  "debounced"
 debounced.initialize()
 
 import Hello from "./hello_controller"
+import CableFrom from "./cable_from_controller"
 application.register("hello", Hello)
+application.register("cable-from", CableFrom)
 
 application.consumer = consumer
 

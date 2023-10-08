@@ -7,4 +7,10 @@ class ApplicationController < ActionController::Base
       redirect_to users_register_path
     end
   end
+
+  private
+
+  def logged_user
+    User.find(session[:user_id])
+  end
 end
