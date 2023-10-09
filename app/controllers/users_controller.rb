@@ -11,6 +11,7 @@ class UsersController < ApplicationController
     if session[:user_id].nil?
       new_user = User.create(name: params[:username])
       session[:user_id] = new_user.id
+      cookies.encrypted[:user_id] = new_user.id
     end
     redirect_to :root
   end

@@ -1,10 +1,13 @@
 module ApplicationCable
   class Connection < ActionCable::Connection::Base
-    identified_by :session_id
+    identified_by :logged_user
 
     def connect
-      self.session_id = request.session.id
-      reject_unauthorized_connection unless session_id
+      user_id = cookies.encrypted[:user_id]
+      return reject_unauthorized_connection if user_id.nil?
+      user = User.find_by(id: user_id)
+      return reject_unauthorized_connection if user.nil?
+      self.logged_user = user
     end
   end
 end

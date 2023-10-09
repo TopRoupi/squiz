@@ -8,8 +8,9 @@
     "@rails/actiontext": "^7.0.1",
     "@rails/activestorage": "^7.0.1",
     "@rails/request.js": "^0.0.6",
+    "debounced": "^0.0.5",
     "stimulus_reflex": "^3.5.0-rc2",
-    "debounced": "^0.0.5"
+    "timer.js": "^1.0.4"
   },
   "scripts": {},
   "devDependencies": {

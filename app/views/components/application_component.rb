@@ -5,6 +5,7 @@ class ApplicationComponent < Phlex::HTML
   include Phlex::Rails::Helpers::ButtonTo
   include Phlex::Rails::Helpers::LinkTo
   include Phlex::Rails::Helpers::DOMID
+  register_element :audio
 
   if Rails.env.development?
     def before_template

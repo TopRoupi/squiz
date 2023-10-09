@@ -802,6 +802,11 @@ thenify-all@^1.0.0:
   dependencies:
     any-promise "^1.0.0"
 
+timer.js@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/timer.js/-/timer.js-1.0.4.tgz#18d72dc5cccc40a4eb393694b2f48de2a2a02819"
+  integrity sha512-UU/lL02CjPMu8cu29h/uyt5yBqcm0vlx51Je9xCmVcH+TLS+X/+chv4V4rHlb37ZiI4iUVyLuC3QvyoFMzadwQ==
+
 to-regex-range@^5.0.1:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/to-regex-range/-/to-regex-range-5.0.1.tgz#1648c44aae7c8d988a326018ed72f5b4dd0392e4"

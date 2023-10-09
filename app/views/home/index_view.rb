@@ -11,7 +11,5 @@ class Home::IndexView < ApplicationView
         link_to "enter", room_path(room)
       end
     end
-
-    render TrackSelectorComponent.new
   end
 end
