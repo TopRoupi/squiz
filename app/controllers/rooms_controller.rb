@@ -4,7 +4,7 @@ class RoomsController < ApplicationController
   def show
     @room.users_presences << logged_user unless @room.users_presences.any? logged_user
 
-    render Rooms::ShowView.new(room: @room)
+    render Rooms::ShowView.new(room: @room, user: logged_user)
   end
 
   def leave

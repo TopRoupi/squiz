@@ -1,10 +1,11 @@
 # frozen_string_literal: true
 
 class RoomBodyComponent < ApplicationComponent
-  def initialize(room:, state: :waiting)
+  def initialize(room:, user:, state: :waiting)
     @room = room
     # state: :waiting, :track_selection, guessing, guess_results
     @state = state
+    @user = user
   end
 
   def template
@@ -13,7 +14,7 @@ class RoomBodyComponent < ApplicationComponent
       when :waiting
         plain ""
       when :track_selection
-        render TrackSelectorComponent.new(room: @room)
+        render TrackSelectorComponent.new(room: @room, user: @user)
       when :guessing
         p do
           plain "playing #{@room.next_track.spotify_track.preview_url} "

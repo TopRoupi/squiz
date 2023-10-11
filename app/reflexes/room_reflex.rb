@@ -4,7 +4,8 @@ class RoomReflex < ApplicationReflex
     room_dom_id = dom_id(room)[1..]
     stream_id = Cable.signed_stream_name(room_dom_id)
 
-    EndTrackSelectionJob.perform_in(10.seconds, room.id)
+    # EndTrackSelectionJob.perform_in(10.seconds, room.id)
+    EndTrackSelectionJob.perform_in(5.minutes, room.id)
 
     cable_ready[ApplicationChannel]
       .replace(
@@ -13,7 +14,7 @@ class RoomReflex < ApplicationReflex
       )
       .replace(
         selector: "#room-body",
-        html: render(RoomBodyComponent.new(room: room, state: :track_selection))
+        html: render(RoomBodyComponent.new(room: room, user: logged_user, state: :track_selection))
       )
       .broadcast_to(stream_id)
     morph :nothing

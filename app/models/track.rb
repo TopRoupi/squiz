@@ -2,6 +2,14 @@ class Track < ApplicationRecord
   belongs_to :room
   belongs_to :user
 
+  def self.search_spotify_tracks(search)
+    if search.blank?
+      []
+    else
+      RSpotify::Track.search(search)
+    end
+  end
+
   def spotify_track
     RSpotify::Track.find(track_id)
   end
