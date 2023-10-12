@@ -1,3 +1,5 @@
+require "sidekiq/web"
+
 Rails.application.routes.draw do
   get "users/register", as: :users_register
   post "users/setup"
@@ -7,4 +9,6 @@ Rails.application.routes.draw do
 
   get "home/index"
   root "home#index"
+
+  mount Sidekiq::Web, at: "sidekiq"
 end

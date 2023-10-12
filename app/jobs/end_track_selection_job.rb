@@ -2,6 +2,7 @@ class EndTrackSelectionJob
   include Sidekiq::Worker
   include CableReady::Broadcaster
   include Rails.application.routes.url_helpers
+  include ApplicationHelper
   delegate :render, to: :ApplicationController
 
   sidekiq_options retry: false

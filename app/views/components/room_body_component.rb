@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class RoomBodyComponent < ApplicationComponent
-  def initialize(room:, user:, state: :waiting)
+  def initialize(room:, user: nil, state: :waiting)
     @room = room
     # state: :waiting, :track_selection, guessing, guess_results
     @state = state

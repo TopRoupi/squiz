@@ -21,8 +21,14 @@ class RoomHeaderComponent < ApplicationComponent
       when :track_selection
         p do
           plain "game is starting in "
-          span(data: {controller: "timer", timer_duration_value: 10}) { "" }
-          plain " | select your tracks"
+          plain " | select your tracks "
+          span(data: {controller: "timer", timer_duration_value: Room.track_selection_time.seconds.to_i}) { "" }
+
+          if @room.owner == helpers.logged_user
+            p do
+              button(data: {reflex: "click->RoomReflex#finish_track_selection", room_id: @room.signed_id}) { "finish track selection" }
+            end
+          end
         end
       when :guessing
         p do
