@@ -13,9 +13,9 @@ class TrackSelectorReflex < ApplicationReflex
     room = Room.find_signed(element.dataset[:room_id])
     track_id = element.dataset[:track_id]
 
-    Track.create(room: room, track_id: track_id, user: logged_user)
+    Track.create(game: room.current_game, track_id: track_id, user: logged_user)
 
-    selected_tracks = logged_user.selected_tracks_on_room(room)
+    selected_tracks = logged_user.selected_tracks_on_game(room.current_game)
     morph "#selected-tracks", render(TrackListComponent.new(room: room, tracks: selected_tracks, mode: :editor))
   end
 
@@ -23,9 +23,9 @@ class TrackSelectorReflex < ApplicationReflex
     room = Room.find_signed(element.dataset[:room_id])
     track_id = element.dataset[:track_id]
 
-    room.tracks.where(user: logged_user, track_id: track_id).delete_all
+    room.current_game.tracks.where(user: logged_user, track_id: track_id).delete_all
 
-    selected_tracks = logged_user.selected_tracks_on_room(room)
+    selected_tracks = logged_user.selected_tracks_on_game(room.current_game)
     morph "#selected-tracks", render(TrackListComponent.new(room: room, tracks: selected_tracks, mode: :editor))
   end
 end

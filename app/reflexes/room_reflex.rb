@@ -8,6 +8,8 @@ class RoomReflex < ApplicationReflex
 
     EndTrackSelectionJob.perform_in(Room.track_selection_time, room.id)
 
+    Game.create(room: room)
+
     cable_ready[ApplicationChannel]
       .replace(
         selector: "#room-header",

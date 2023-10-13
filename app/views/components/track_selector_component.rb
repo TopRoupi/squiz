@@ -8,7 +8,7 @@ class TrackSelectorComponent < ApplicationComponent
 
     @tracks = Track.search_spotify_tracks(search)
 
-    @selected_tracks = user.selected_tracks_on_room(room)
+    @selected_tracks = user.selected_tracks_on_game(room.current_game)
   end
 
   def template

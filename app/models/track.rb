@@ -1,5 +1,5 @@
 class Track < ApplicationRecord
-  belongs_to :room
+  belongs_to :game
   belongs_to :user
 
   def self.search_spotify_tracks(search)
