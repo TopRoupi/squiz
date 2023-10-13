@@ -36,7 +36,7 @@ ActiveRecord::Schema[7.2].define(version: 2023_10_09_115143) do
     t.uuid "room_id", null: false
     t.uuid "user_id", null: false
     t.string "track_id"
-    t.boolean "guessed"
+    t.boolean "guessed", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["room_id"], name: "index_tracks_on_room_id"

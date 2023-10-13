@@ -4,7 +4,7 @@ class CreateTracks < ActiveRecord::Migration[7.2]
       t.references :room, null: false, foreign_key: true, type: :uuid
       t.references :user, null: false, foreign_key: true, type: :uuid
       t.string :track_id
-      t.boolean :guessed
+      t.boolean :guessed, default: false
 
       t.timestamps
     end

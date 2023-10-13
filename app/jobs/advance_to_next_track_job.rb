@@ -1,4 +1,4 @@
-class EndTrackSelectionJob
+class AdvanceToNextTrackJob
   include Sidekiq::Worker
   include CableReady::Broadcaster
   include Rails.application.routes.url_helpers
@@ -11,6 +11,8 @@ class EndTrackSelectionJob
     room_dom_id = dom_id(room)[1..]
     stream_id = Cable.signed_stream_name(room_dom_id)
 
+    room.next_track.update!(guessed: true)
+
     cable_ready[ApplicationChannel]
       .replace(
         selector: "#room-header",
@@ -22,6 +24,8 @@ class EndTrackSelectionJob
       )
       .broadcast_to(stream_id)
 
-    AdvanceToNextTrackJob.perform_in(Room.track_guess_time, room.id)
+    if room.next_track
+      AdvanceToNextTrackJob.perform_in(Room.track_guess_time, room.id)
+    end
   end
 end

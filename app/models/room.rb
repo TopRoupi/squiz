@@ -10,6 +10,10 @@ class Room < ApplicationRecord
     5.minutes
   end
 
+  def self.track_guess_time
+    30.seconds
+  end
+
   def delete_track_selection_scheduled_jobs
     ss = Sidekiq::ScheduledSet.new
     room_end_trackselection_jobs = ss.select { |job| job["args"].first == id }
@@ -17,6 +21,6 @@ class Room < ApplicationRecord
   end
 
   def next_track
-    tracks.order("created_at ASC").last
+    tracks.where(guessed: false).order("created_at ASC").last
   end
 end
