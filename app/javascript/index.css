@@ -3,5 +3,5 @@
 @tailwind utilities;
 
 button {
-  @apply bg-red-500 !important
+  @apply border-solid border-2 border-gray-500 !important
 }

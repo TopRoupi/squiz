@@ -24,6 +24,7 @@ class EndTrackSelectionJob
       )
       .broadcast_to(stream_id)
 
+    ShowTurnResultsJob.perform_in(Room.show_results_time, room.id)
     AdvanceToNextTrackJob.perform_in(Room.track_guess_time, room.id)
   end
 end

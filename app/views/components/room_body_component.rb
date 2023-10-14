@@ -21,8 +21,8 @@ class RoomBodyComponent < ApplicationComponent
         p do
           plain "playing #{@next_track.spotify_track.preview_url} "
           div(data: {controller: "auto-play", auto_play_url_value: @next_track.spotify_track.preview_url}) {}
-          @next_track.choices.shuffle.each_with_index do |choice, i|
-            p { "#{i} : #{choice.name}" }
+          div(id: dom_id(@game, "picks")) do
+            render(PicksComponent.new(game: @game))
           end
         end
       end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2023_10_14_143354) do
+ActiveRecord::Schema[7.2].define(version: 2023_10_14_183825) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -34,6 +34,15 @@ ActiveRecord::Schema[7.2].define(version: 2023_10_14_143354) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["room_id"], name: "index_games_on_room_id"
+  end
+
+  create_table "picks", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "user_id", null: false
+    t.uuid "choice_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["choice_id"], name: "index_picks_on_choice_id"
+    t.index ["user_id"], name: "index_picks_on_user_id"
   end
 
   create_table "presences", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -73,6 +82,8 @@ ActiveRecord::Schema[7.2].define(version: 2023_10_14_143354) do
 
   add_foreign_key "choices", "tracks"
   add_foreign_key "games", "rooms"
+  add_foreign_key "picks", "choices"
+  add_foreign_key "picks", "users"
   add_foreign_key "presences", "rooms"
   add_foreign_key "presences", "users"
   add_foreign_key "rooms", "users", column: "owner_id"

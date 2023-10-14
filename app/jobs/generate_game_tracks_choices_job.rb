@@ -1,8 +1,5 @@
 class GenerateGameTracksChoicesJob
   include Sidekiq::Worker
-  include CableReady::Broadcaster
-  include Rails.application.routes.url_helpers
-  delegate :render, to: :ApplicationController
 
   sidekiq_options retry: false
 

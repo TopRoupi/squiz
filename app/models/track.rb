@@ -51,9 +51,11 @@ class Track < ApplicationRecord
 
     track_choices = track_choices.sample(4)
 
-    to_choice.save!
-    track_choices.each do |track|
-      spotify_track_to_choice(track).save!
+    track_choices.map! do |track|
+      spotify_track_to_choice(track)
     end
+    track_choices << to_choice
+
+    track_choices.shuffle.each { |track| track.save! }
   end
 end

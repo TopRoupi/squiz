@@ -14,6 +14,10 @@ class Room < ApplicationRecord
     30.seconds
   end
 
+  def self.show_results_time
+    20.seconds
+  end
+
   def current_game
     games.order(created_at: :ASC).last
   end
