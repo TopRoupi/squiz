@@ -3,6 +3,8 @@
 class RoomBodyComponent < ApplicationComponent
   def initialize(room:, user: nil, state: :waiting)
     @room = room
+    @game = room.current_game
+    @next_track = @game.next_track
     # state: :waiting, :track_selection, guessing, guess_results
     @state = state
     @user = user
@@ -17,10 +19,10 @@ class RoomBodyComponent < ApplicationComponent
         render TrackSelectorComponent.new(room: @room, user: @user)
       when :guessing
         p do
-          plain "playing #{@room.next_track.spotify_track.preview_url} "
-          div(data: {controller: "auto-play", auto_play_url_value: @room.next_track.spotify_track.preview_url}) {}
-          @room.next_track.choices.each_with_index do |track, i|
-            p { "#{i} : #{track.name}" }
+          plain "playing #{@next_track.spotify_track.preview_url} "
+          div(data: {controller: "auto-play", auto_play_url_value: @next_track.spotify_track.preview_url}) {}
+          @next_track.choices.shuffle.each_with_index do |choice, i|
+            p { "#{i} : #{choice.name}" }
           end
         end
       end

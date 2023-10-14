@@ -11,7 +11,7 @@ class AdvanceToNextTrackJob
     room_dom_id = dom_id(room)[1..]
     stream_id = Cable.signed_stream_name(room_dom_id)
 
-    room.next_track.update!(guessed: true)
+    room.current_game.next_track.update!(guessed: true)
 
     cable_ready[ApplicationChannel]
       .replace(
@@ -24,7 +24,7 @@ class AdvanceToNextTrackJob
       )
       .broadcast_to(stream_id)
 
-    if room.next_track
+    if room.current_game.next_track
       AdvanceToNextTrackJob.perform_in(Room.track_guess_time, room.id)
     end
   end

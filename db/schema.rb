@@ -10,9 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2023_10_13_155024) do
+ActiveRecord::Schema[7.2].define(version: 2023_10_14_143354) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "choices", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "track_id", null: false
+    t.string "spotify_track_id"
+    t.string "album_name"
+    t.string "album_image_url"
+    t.string "artist_name"
+    t.string "preview_url"
+    t.string "name"
+    t.boolean "decoy", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["track_id"], name: "index_choices_on_track_id"
+  end
 
   create_table "games", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "room_id", null: false
@@ -57,6 +71,7 @@ ActiveRecord::Schema[7.2].define(version: 2023_10_13_155024) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "choices", "tracks"
   add_foreign_key "games", "rooms"
   add_foreign_key "presences", "rooms"
   add_foreign_key "presences", "users"

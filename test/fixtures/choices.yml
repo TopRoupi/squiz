@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  track: one
+  spotify_track_id: MyString
+  album_url: MyString
+  artist: MyString
+  preview_url: MyString
+  name: MyString
+  decoy: false
+
+two:
+  track: two
+  spotify_track_id: MyString
+  album_url: MyString
+  artist: MyString
+  preview_url: MyString
+  name: MyString
+  decoy: false

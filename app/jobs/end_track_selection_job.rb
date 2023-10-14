@@ -11,6 +11,8 @@ class EndTrackSelectionJob
     room_dom_id = dom_id(room)[1..]
     stream_id = Cable.signed_stream_name(room_dom_id)
 
+    GenerateGameTracksChoicesJob.perform_inline(room.current_game.id)
+
     cable_ready[ApplicationChannel]
       .replace(
         selector: "#room-header",

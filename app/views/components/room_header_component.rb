@@ -32,8 +32,8 @@ class RoomHeaderComponent < ApplicationComponent
         end
       when :guessing
         p do
-          plain "guessing #{@room.next_track.track_id} "
-          span(data: {controller: "timer", timer_duration_value: 30}) { "" }
+          plain "guessing #{@room.current_game.next_track.track_id} "
+          span(data: {controller: "timer", timer_duration_value: Room.track_guess_time.seconds.to_i}) { "" }
         end
       end
     end
