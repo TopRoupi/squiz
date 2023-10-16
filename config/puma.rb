@@ -37,7 +37,24 @@ pidfile ENV.fetch("PIDFILE") { "tmp/pids/server.pid" }
 # before forking the application. This takes advantage of Copy On Write
 # process behavior so workers use less memory.
 #
-# preload_app!
+
+if Rails.env.production?
+  preload_app!
+
+  x = nil
+  on_worker_boot do
+    x = Sidekiq.configure_embed do |config|
+      # config.logger.level = Logger::DEBUG
+      config.queues = %w[critical default low]
+      config.concurrency = 2
+    end
+    x.run
+  end
+
+  on_worker_shutdown do
+    x&.stop
+  end
+end
 
 # Allow puma to be restarted by `bin/rails restart` command.
 plugin :tmp_restart
