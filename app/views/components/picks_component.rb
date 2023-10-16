@@ -17,6 +17,7 @@ class PicksComponent < ApplicationComponent
     ) do
       @next_track.choices.each_with_index do |choice, i|
         button(
+          class: "btn w-full mb-2",
           id: choice.id,
           data: {
             reflex: "click->GameReflex#make_choice",
@@ -24,7 +25,7 @@ class PicksComponent < ApplicationComponent
             picks_target: "choice"
           }
         ) do
-          "#{i} : #{choice.name}"
+          choice.name
         end
         br
       end

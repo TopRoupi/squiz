@@ -19,7 +19,9 @@ class ApplicationLayout < ApplicationView
       end
 
       body class: "p-10" do
-        main(&block)
+        div class: "m-auto", style: "max-width: 700px;" do
+          main(&block)
+        end
       end
     end
   end

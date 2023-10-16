@@ -11,7 +11,7 @@ class RoomBodyComponent < ApplicationComponent
   end
 
   def template
-    div id: "room-body" do
+    div class: "border-solid border-2 border-gray-900 p-2 mb-2", id: "room-body" do
       case @state
       when :waiting
         plain ""
@@ -19,8 +19,10 @@ class RoomBodyComponent < ApplicationComponent
         render TrackSelectorComponent.new(room: @room, user: @user)
       when :guessing
         p do
-          plain "playing #{@next_track.spotify_track.preview_url} "
-          div(data: {controller: "auto-play", auto_play_url_value: @next_track.spotify_track.preview_url}) {}
+          div(
+            class: "mb-4 w-full",
+            data: {controller: "auto-play", auto_play_url_value: @next_track.spotify_track.preview_url}
+          ) {}
           div(id: dom_id(@game, "picks")) do
             render(PicksComponent.new(game: @game))
           end

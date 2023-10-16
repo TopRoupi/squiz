@@ -6,12 +6,13 @@ class Users::RegisterView < ApplicationView
   include Phlex::Rails::Helpers::TextField
 
   def template
-    h1 { "Users::Setup" }
-    p { "Find me in app/views/users/setup_view.rb" }
     form_with url: "/users/setup", method: :post do |f|
-      plain f.label :username, "User Name"
-      plain f.text_field :username
-      plain f.submit
+      h1 class: "header" do
+        "User Registration"
+      end
+      plain f.label :username, "User Name", class: "block mb-2"
+      plain f.text_field :username, class: "block border-solid border-2 border-gray-900"
+      plain f.submit "Register", class: "btn mt-3"
     end
   end
 end

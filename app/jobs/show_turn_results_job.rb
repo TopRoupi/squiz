@@ -20,5 +20,21 @@ class ShowTurnResultsJob
         value: result_choice.id
       )
       .broadcast_to(stream_id)
+
+    cable_ready[ApplicationChannel]
+      .replace(
+        selector: "##{room_dom_id}",
+        html: rendered_room_presence(room)
+      )
+      .broadcast_to(stream_id)
+  end
+
+  private
+
+  def rendered_room_presence(room)
+    ApplicationController.renderer.render(
+      RoomPlayerPresenceComponent.new(room: room),
+      layout: false
+    )
   end
 end

@@ -8,32 +8,38 @@ class RoomHeaderComponent < ApplicationComponent
   end
 
   def template
-    div id: "room-header" do
+    div class: "flex border-solid border-2 border-gray-900 p-2 mb-2", id: "room-header" do
       case @state
       when :waiting
+        p { "waiting players" }
         if @room.owner == helpers.logged_user
-          div id: "start-button" do
-            button(data: {reflex: "click->RoomReflex#start_game", room_id: @room.signed_id}) { "start game" }
+          div class: "ml-auto", id: "start-button" do
+            button(
+              class: "btn",
+              data: {reflex: "click->RoomReflex#start_game", room_id: @room.signed_id}
+            ) { "start game" }
           end
         end
-
-        p { "waiting players" }
       when :track_selection
-        p do
-          plain "game is starting in "
-          plain " | select your tracks "
-          span(data: {controller: "timer", timer_duration_value: Room.track_selection_time.seconds.to_i}) { "" }
+        span class: "font-semibold mr-2" do
+          "select your tracks"
+        end
+        span { "game is starting in " }
+        span(
+          class: "font-semibold ml-2",
+          data: {controller: "timer", timer_duration_value: Room.track_selection_time.seconds.to_i}
+        ) { "" }
 
-          if @room.owner == helpers.logged_user
-            p do
-              button(data: {reflex: "click->RoomReflex#finish_track_selection", room_id: @room.signed_id}) { "finish track selection" }
-            end
-          end
+        if @room.owner == helpers.logged_user
+          button(
+            class: "btn ml-auto",
+            data: {reflex: "click->RoomReflex#finish_track_selection", room_id: @room.signed_id}
+          ) { "finish track selection" }
         end
       when :guessing
         p do
-          plain "guessing #{@room.current_game.next_track.track_id} "
-          span(data: {controller: "timer", timer_duration_value: Room.track_guess_time.seconds.to_i}) { "" }
+          plain "guessing ??? "
+          span(data: {controller: "timer", timer_duration_value: Room.show_results_time.seconds.to_i}) { "" }
         end
       end
     end
