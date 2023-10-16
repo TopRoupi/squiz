@@ -38,7 +38,11 @@ pidfile ENV.fetch("PIDFILE") { "tmp/pids/server.pid" }
 # process behavior so workers use less memory.
 #
 
+require "sidekiq"
+
 if Rails.env.production?
+  workers 1
+
   preload_app!
 
   x = nil
