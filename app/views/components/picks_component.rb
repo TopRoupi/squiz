@@ -9,18 +9,25 @@ class PicksComponent < ApplicationComponent
   end
 
   def template
-    @next_track.choices.each_with_index do |choice, i|
-      button(
-        id: dom_id(choice, "button"),
-        data: {
-          reflex: "click->GameReflex#make_choice",
-          choice_id: choice.signed_id
-        },
-        disabled: !@picked.nil?
-      ) do
-        "#{i} : #{choice.name} #{'picked' if @picked == choice}"
+    div(
+      id: dom_id(@next_track, "choices"),
+      data: {
+        controller: "picks"
+      }
+    ) do
+      @next_track.choices.each_with_index do |choice, i|
+        button(
+          id: choice.id,
+          data: {
+            reflex: "click->GameReflex#make_choice",
+            choice_id: choice.signed_id,
+            picks_target: "choice"
+          }
+        ) do
+          "#{i} : #{choice.name}"
+        end
+        br
       end
-      br
     end
   end
 end

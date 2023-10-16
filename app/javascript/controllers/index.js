@@ -11,10 +11,12 @@ import Hello from "./hello_controller"
 import CableFrom from "./cable_from_controller"
 import Timer from "./timer_controller"
 import AutoPlay from "./auto_play_controller"
+import Picks from "./picks_controller"
 application.register("hello", Hello)
 application.register("cable-from", CableFrom)
 application.register("timer", Timer)
 application.register("auto-play", AutoPlay)
+application.register("picks", Picks)
 
 application.consumer = consumer
 
