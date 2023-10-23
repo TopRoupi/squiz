@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2023_10_14_183825) do
+ActiveRecord::Schema[7.2].define(version: 2023_10_22_174347) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -34,6 +34,15 @@ ActiveRecord::Schema[7.2].define(version: 2023_10_14_183825) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["room_id"], name: "index_games_on_room_id"
+  end
+
+  create_table "phase_changes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "game_id", null: false
+    t.integer "phase", default: 0
+    t.datetime "end_time", precision: nil
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["game_id"], name: "index_phase_changes_on_game_id"
   end
 
   create_table "picks", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -82,6 +91,7 @@ ActiveRecord::Schema[7.2].define(version: 2023_10_14_183825) do
 
   add_foreign_key "choices", "tracks"
   add_foreign_key "games", "rooms"
+  add_foreign_key "phase_changes", "games"
   add_foreign_key "picks", "choices"
   add_foreign_key "picks", "users"
   add_foreign_key "presences", "rooms"

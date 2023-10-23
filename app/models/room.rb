@@ -18,8 +18,16 @@ class Room < ApplicationRecord
     20.seconds
   end
 
+  def phase
+    if current_game
+      current_game.phase
+    else
+      :waiting
+    end
+  end
+
   def current_game
-    games.order(created_at: :ASC).last
+    games.where(finished: false).order(created_at: :ASC).last
   end
 
   def delete_track_selection_scheduled_jobs

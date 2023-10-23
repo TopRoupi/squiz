@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
 class RoomBodyComponent < ApplicationComponent
-  def initialize(room:, user: nil, state: :waiting)
+  def initialize(room:, user: nil)
     @room = room
     @game = room.current_game
-    @next_track = @game.next_track
-    # state: :waiting, :track_selection, guessing, guess_results
-    @state = state
+    @next_track = @game&.next_track
+    # state: :waiting, :selection, guessing
+    @state = @room.phase
     @user = user
   end
 
@@ -15,7 +15,7 @@ class RoomBodyComponent < ApplicationComponent
       case @state
       when :waiting
         plain ""
-      when :track_selection
+      when :selection
         render TrackSelectorComponent.new(room: @room, user: @user)
       when :guessing
         p do

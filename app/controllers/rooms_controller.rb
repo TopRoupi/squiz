@@ -15,8 +15,7 @@ class RoomsController < ApplicationController
   end
 
   def create
-    room = Room.create(owner: logged_user, max_users: 6, invite_code: SecureRandom.base64(6))
-    Game.create(room: room)
+    Room.create(owner: logged_user, max_users: 6, invite_code: SecureRandom.base64(6))
     redirect_to :root
   end
 

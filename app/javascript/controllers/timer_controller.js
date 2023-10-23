@@ -17,6 +17,10 @@ function startTimer(duration, display) {
     }, 1000);
 }
 
+function zeroPad(num, places) {
+  return String(num).padStart(places, '0')
+}
+
 export default class extends ApplicationController {
   static values = {
     duration: { type: Number, default: 30 },
@@ -26,7 +30,7 @@ export default class extends ApplicationController {
     super.connect()
 
     var duration = this.durationValue
-    this.element.innerHTML = "00:00"
+    this.element.innerHTML = `${zeroPad(Math.floor(this.durationValue / 60), 2)}:${(zeroPad(Math.floor(this.durationValue % 60), 2))}`
 
     startTimer(duration, this.element);
   }

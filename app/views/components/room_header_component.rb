@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 class RoomHeaderComponent < ApplicationComponent
-  def initialize(room:, state: :waiting)
+  def initialize(room:)
     @room = room
-    # state: :waiting, :track_selection, guessing, guess_results
-    @state = state
+    # state: :waiting, :selection, guessing, guess_results
+    @state = @room.phase
   end
 
   def template
@@ -20,14 +20,14 @@ class RoomHeaderComponent < ApplicationComponent
             ) { "start game" }
           end
         end
-      when :track_selection
+      when :selection
         span class: "font-semibold mr-2" do
           "select your tracks"
         end
         span { "game is starting in " }
         span(
           class: "font-semibold ml-2",
-          data: {controller: "timer", timer_duration_value: Room.track_selection_time.seconds.to_i}
+          data: {controller: "timer", timer_duration_value: @room.current_game.current_phase.seconds_to_end}
         ) { "" }
 
         if @room.owner == helpers.logged_user
