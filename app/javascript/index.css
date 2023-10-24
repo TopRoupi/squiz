@@ -15,7 +15,7 @@ button {
 }
 
 .picked {
-  @apply border-solid border-r-4 border-yellow-500 !important;
+  @apply border-solid border-2 border-yellow-500 !important;
 }
 
 .pick-result {
@@ -23,7 +23,7 @@ button {
 }
 
 .not-picked {
-  @apply bg-gray-400 !important;
+  @apply bg-gray-600 !important;
 }
 
 .wrong-pick {

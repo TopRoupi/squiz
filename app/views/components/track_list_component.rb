@@ -10,7 +10,7 @@ class TrackListComponent < ApplicationComponent
   end
 
   def template
-    @tracks.each do |t|
+    @tracks.reject { |t| t.preview_url.nil? }.each do |t|
       # img src: t.album.images.first
       div class: "flex" do
         img width: 50, height: 50, src: t.album.images.first["url"]

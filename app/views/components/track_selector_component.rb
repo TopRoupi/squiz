@@ -1,17 +1,20 @@
 # frozen_string_literal: true
 
 class TrackSelectorComponent < ApplicationComponent
-  def initialize(room:, user:, search: "")
+  def initialize(room:, user: nil, search: "")
     @room = room
     @search = search
     @user = user
 
     @tracks = Track.search_spotify_tracks(search)
 
-    @selected_tracks = user.selected_tracks_on_game(room.current_game)
+    @selected_tracks = user&.selected_tracks_on_game(room.current_game)
+    @selected_tracks ||= []
   end
 
   def template
+    div id: "track-selector-errors", class: "text-red-900 font-bold bg-yellow-200" do
+    end
     p { "your selected tracks for this match" }
     div id: "selected-tracks" do
       render TrackListComponent.new(room: @room, tracks: @selected_tracks, mode: :editor)

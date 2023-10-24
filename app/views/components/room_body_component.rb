@@ -20,8 +20,11 @@ class RoomBodyComponent < ApplicationComponent
       when :guessing
         p do
           div(
-            class: "mb-4 w-full",
-            data: {controller: "auto-play", auto_play_url_value: @next_track.spotify_track.preview_url}
+            class: "mb-4 w-full hidden",
+            data: {
+              controller: "auto-play",
+              auto_play_url_value: @next_track.spotify_track.preview_url
+            }
           ) {}
           div(id: dom_id(@game, "picks")) do
             render(PicksComponent.new(game: @game))

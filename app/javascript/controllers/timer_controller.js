@@ -1,8 +1,8 @@
 import ApplicationController from './application_controller'
 
-function startTimer(duration, display) {
+function startTimer(duration, display, callback) {
     var timer = duration, minutes, seconds;
-    setInterval(function () {
+    var interval = setInterval(function () {
         minutes = parseInt(timer / 60, 10);
         seconds = parseInt(timer % 60, 10);
 
@@ -12,7 +12,8 @@ function startTimer(duration, display) {
         display.textContent = minutes + ":" + seconds;
 
         if (--timer < 0) {
-            timer = 0;
+          callback()
+          clearInterval(interval)
         }
     }, 1000);
 }
@@ -24,6 +25,7 @@ function zeroPad(num, places) {
 export default class extends ApplicationController {
   static values = {
     duration: { type: Number, default: 30 },
+    callbackReflex: { type: String, default: "" }
   }
 
   connect () {
@@ -32,6 +34,9 @@ export default class extends ApplicationController {
     var duration = this.durationValue
     this.element.innerHTML = `${zeroPad(Math.floor(this.durationValue / 60), 2)}:${(zeroPad(Math.floor(this.durationValue % 60), 2))}`
 
-    startTimer(duration, this.element);
+    console.log(this.callbackReflexValue)
+    startTimer(duration, this.element, () => {
+      this.stimulate(this.callbackReflexValue)
+    });
   }
 }

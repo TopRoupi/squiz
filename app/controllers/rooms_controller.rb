@@ -2,6 +2,7 @@ class RoomsController < ApplicationController
   before_action :set_room, only: [:show, :leave]
 
   def show
+    @room.current_game&.auto_correct_phase
     @room.users_presences << logged_user unless @room.users_presences.any? logged_user
 
     render Rooms::ShowView.new(room: @room, user: logged_user)
