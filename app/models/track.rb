@@ -36,7 +36,7 @@ class Track < ApplicationRecord
 
   def generate_choices
     albums = [spotify_track.album]
-    track_choices = albums.last.tracks.reject { |t| t.id == spotify_track.id }
+    track_choices = albums.last.tracks.reject { |t| t.name == spotify_track.name }
 
     while track_choices.size < 4
       artist_albums = spotify_track.artists.first.albums

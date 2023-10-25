@@ -56,8 +56,16 @@ class RoomReflex < ApplicationReflex
 
     room_dom_id = dom_id(room)[1..]
     stream_id = Cable.signed_stream_name(room_dom_id)
+    current_track = room.current_game.next_track
 
-    result_choice = room.current_game.next_track.choices.where(decoy: false).last
+    result_choice = current_track.choices.where(decoy: false).last
+
+    cable_ready[ApplicationChannel]
+      .replace(
+        selector: "#track_album",
+        html: render(CoverViewerComponent.new(track: current_track, hide: false))
+      )
+      .broadcast_to(stream_id)
 
     cable_ready[ApplicationChannel]
       .set_attribute(
@@ -87,7 +95,10 @@ class RoomReflex < ApplicationReflex
     room_dom_id = dom_id(room)[1..]
     stream_id = Cable.signed_stream_name(room_dom_id)
 
-    room.current_game.next_track.update!(guessed: true)
+    game = room.current_game
+
+    game.next_track.update!(guessed: true)
+    game.change_current_phase_to(:guessing)
 
     if room.current_game.next_track.nil?
       room.current_game.change_current_phase_to(:finished)

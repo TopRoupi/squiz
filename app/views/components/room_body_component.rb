@@ -18,7 +18,12 @@ class RoomBodyComponent < ApplicationComponent
       when :selection
         render TrackSelectorComponent.new(room: @room, user: @user)
       when :guessing
-        p do
+        div do
+          div(id: "track_album") do
+            render(CoverViewerComponent.new(track: @next_track))
+          end
+
+
           div(
             class: "mb-4 w-full hidden",
             data: {
