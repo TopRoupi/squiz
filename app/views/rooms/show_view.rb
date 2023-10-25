@@ -9,6 +9,13 @@ class Rooms::ShowView < ApplicationView
       @room.invite_code
     end
 
+    div(
+      data: {
+        controller: "cable-from",
+        cable_from_id_value: Cable.signed_stream_name(dom_id(@room))
+      }
+    ) {}
+
     render RoomPlayerPresenceComponent.new(room: @room)
 
     render RoomHeaderComponent.new(room: @room)
