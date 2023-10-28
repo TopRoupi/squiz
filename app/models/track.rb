@@ -45,7 +45,7 @@ class Track < ApplicationRecord
         albums.any?(a)
       end.sample
 
-      track_choices << albums.last.tracks
+      track_choices << albums.last.tracks.reject { |t| t.name == spotify_track.name }
       track_choices.flatten!
     end
 

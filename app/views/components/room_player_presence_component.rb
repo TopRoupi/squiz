@@ -15,7 +15,7 @@ class RoomPlayerPresenceComponent < ApplicationComponent
       end
       @room.users_presences.each_with_index do |user, i|
         p do
-          "#{i + 1}. #{user.name} | points: #{user.points_on_room(@room)}"
+          "#{i + 1}. #{user.name} | points: #{user.points_on_room(@room)} | last score: #{user.last_score_on_room(@room)}"
         end
       end
     end

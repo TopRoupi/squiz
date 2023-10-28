@@ -32,9 +32,9 @@ class RoomReflex < ApplicationReflex
     room_dom_id = dom_id(room)[1..]
     stream_id = Cable.signed_stream_name(room_dom_id)
 
-    room.current_game.change_current_phase_to(:guessing)
-
     GenerateGameTracksChoicesJob.perform_inline(room.current_game.id)
+
+    room.current_game.change_current_phase_to(:guessing)
 
     cable_ready[ApplicationChannel]
       .replace(
