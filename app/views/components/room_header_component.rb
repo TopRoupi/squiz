@@ -40,6 +40,8 @@ class RoomHeaderComponent < ApplicationComponent
             data: {reflex: "click->RoomReflex#finish_track_selection"}
           ) { "finish track selection" }
         end
+      when :generation
+        span { "generating random choices for each track" }
       when :guessing
         div do
           plain "time to pick "

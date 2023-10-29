@@ -20,6 +20,10 @@ class RoomBodyComponent < ApplicationComponent
           render PlayersSelectedTracksComponent.new(game: @game)
         end
         render TrackSelectorComponent.new(room: @room, user: @user)
+      when :generation
+        div id: "choices-generation" do
+          render ChoicesGenerationComponent.new(game: @game)
+        end
       when :guessing
         div do
           div(id: "track_album") do

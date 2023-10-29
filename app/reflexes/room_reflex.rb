@@ -38,6 +38,17 @@ class RoomReflex < ApplicationReflex
 
     room.current_game.change_current_phase_to(:generation)
 
+    cable_ready[ApplicationChannel]
+      .replace(
+        selector: "#room-header",
+        html: render(RoomHeaderComponent.new(room: room))
+      )
+      .replace(
+        selector: "#room-body",
+        html: render(RoomBodyComponent.new(room: room))
+      )
+      .broadcast_to(stream_id)
+
     GenerateGameTracksChoicesJob.perform_inline(room.current_game.id)
 
     room.current_game.change_current_phase_to(:guessing)
