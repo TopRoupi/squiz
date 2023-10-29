@@ -16,13 +16,15 @@ class RoomBodyComponent < ApplicationComponent
       when :waiting
         plain ""
       when :selection
+        div id: "players-tracks" do
+          render PlayersSelectedTracksComponent.new(game: @game)
+        end
         render TrackSelectorComponent.new(room: @room, user: @user)
       when :guessing
         div do
           div(id: "track_album") do
             render(CoverViewerComponent.new(track: @next_track))
           end
-
 
           div(
             class: "mb-4 w-full hidden",

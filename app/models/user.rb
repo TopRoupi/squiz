@@ -19,6 +19,15 @@ class User < ApplicationRecord
       .last
       &.score
     score ||= 0
+    score
+  end
+
+  def has_track_on_game?(track_id:, game:)
+    game.tracks.where(user: self, track_id: track_id).size > 0
+  end
+
+  def count_selected_tracks_on_game(game)
+    game.tracks.where(user: self).count
   end
 
   def selected_tracks_on_game(game)
