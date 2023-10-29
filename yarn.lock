@@ -7,6 +7,11 @@
   resolved "https://registry.yarnpkg.com/@alloc/quick-lru/-/quick-lru-5.2.0.tgz#7bf68b20c0a350f936915fcae06f58e32007ce30"
   integrity sha512-UrcABB+4bUrFABwbluTIBErXwvbsU/V7TZWfmbgJfbkwiBuziS9gxdODUyuiecfdGQ85jglMW6juS3+z5TsKLw==
 
+"@cable_ready/audio_operations@^5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/@cable_ready/audio_operations/-/audio_operations-5.0.0.tgz#4b1a29661f736efcbe531fd5f3d2fca543b46774"
+  integrity sha512-QjUKbIOx/NJXsOVxfpP7mxtqbSGc8A1ZZU+yZGGbVsQCQUzAy69iK1jMxayBXF7KjNvVg7GRuD2sgWsA84MkdQ==
+
 "@esbuild/android-arm64@0.18.20":
   version "0.18.20"
   resolved "https://registry.yarnpkg.com/@esbuild/android-arm64/-/android-arm64-0.18.20.tgz#984b4f9c8d0377443cc2dfcef266d02244593622"

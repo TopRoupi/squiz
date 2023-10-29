@@ -3,8 +3,10 @@ import StimulusReflex from "stimulus_reflex"
 import consumer from "../channels/consumer"
 import controller from "./application_controller"
 import CableReady from "cable_ready"
+import AudioOperations from '@cable_ready/audio_operations'
 import debounced from  "debounced"
 
+CableReady.addOperations(AudioOperations)
 debounced.initialize()
 
 import Hello from "./hello_controller"

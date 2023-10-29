@@ -8,12 +8,22 @@ export default class extends ApplicationController {
   connect () {
     super.connect()
 
-    console.log("hi")
-    console.log(this.urlValue)
     this.element.innerHTML = "<audio controls><source src=\"" + this.urlValue + "\"></audio>"
 
     var audio_element = this.element.children[0]
-    audio_element.play()
-    console.log(audio_element)
+    this.playAudio(audio_element)
+  }
+
+  playAudio (element) {
+    element.play().catch(error => {
+      if (error.name === 'NotAllowedError' || error.name === 'NotSupportedError') {
+        alert("we wont access your mic to anything this permission is required so we can autoplay audio")
+        navigator.mediaDevices.getUserMedia({
+          audio: true,
+        }).then(() => {
+          element.play()
+        })
+      }
+    })
   }
 }

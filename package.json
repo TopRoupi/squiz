@@ -2,6 +2,7 @@
   "name": "app",
   "private": "true",
   "dependencies": {
+    "@cable_ready/audio_operations": "^5.0.0",
     "@hotwired/stimulus": "npm:@hotwired/stimulus",
     "@hotwired/turbo-rails": "^7.3.0",
     "@rails/actioncable": "^7.0.1",

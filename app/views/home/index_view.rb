@@ -2,6 +2,8 @@
 
 class Home::IndexView < ApplicationView
   def template
+    div(data_controller: "hello") { "d" }
+
     h1 class: "header" do
       "Game Rooms"
     end
