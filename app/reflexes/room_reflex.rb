@@ -130,6 +130,13 @@ class RoomReflex < ApplicationReflex
         selector: "#room-body",
         html: render(RoomBodyComponent.new(room: room))
       )
+      .replace(
+        selector: "##{room_dom_id}",
+        html: render(
+          RoomPlayerPresenceComponent.new(room: room),
+          layout: false
+        )
+      )
       .broadcast_to(stream_id)
   end
 end

@@ -13,23 +13,25 @@ class TrackSelectorComponent < ApplicationComponent
   end
 
   def template
-    div id: "track-selector-errors", class: "text-red-900 font-bold bg-yellow-200" do
-    end
-    p { "your selected tracks for this match" }
-    div id: "selected-tracks" do
-      render TrackListComponent.new(room: @room, tracks: @selected_tracks, mode: :editor)
-    end
-    h1 { "TrackSelector" }
-    span { "search" }
-    input(
-      class: "border-solid border-2 border-black ml-2",
-      value: @search,
-      data_reflex: "debounced:input->TrackSelectorReflex#search",
-      data_room_id: @room.signed_id
-    )
+    div class: "card bg-neutral text-neutral-content p-2 rounded-md mt-2" do
+      h1(class: "text-center mb-2") { "TrackSelector" }
+      div id: "track-selector-errors", class: "text-red-900 font-bold bg-yellow-200" do
+      end
+      input(
+        class: "input input-bordered input-sm w-full mb-2",
+        placeholder: "search",
+        value: @search,
+        data_reflex: "debounced:input->TrackSelectorReflex#search",
+        data_room_id: @room.signed_id
+      )
 
-    div id: "tracks" do
-      render TrackListComponent.new(room: @room, tracks: @tracks)
+      div id: "selected-tracks" do
+        render TrackListComponent.new(room: @room, tracks: @selected_tracks, mode: :editor)
+      end
+
+      div id: "tracks" do
+        render TrackListComponent.new(room: @room, tracks: @tracks)
+      end
     end
   end
 end

@@ -11,7 +11,7 @@ class Room < ApplicationRecord
   end
 
   def self.track_guess_time
-    30.seconds
+    35.seconds
   end
 
   def self.show_results_time

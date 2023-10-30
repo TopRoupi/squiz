@@ -12,14 +12,15 @@ class User < ApplicationRecord
   end
 
   def last_score_on_room(room)
-    score = picks
+    last_track = room.current_game&.next_track
+    return nil unless last_track
+    return nil if last_track.guessed
+    picks
       .joins(:user, choice: [game: [:room]])
-      .where("rooms.id = ? and choices.decoy = false and picks.user_id = ?", room.id, id)
+      .where("choices.track_id = ? and picks.user_id = ?", last_track.id, id)
       .order("created_at ASC")
       .last
       &.score
-    score ||= 0
-    score
   end
 
   def has_track_on_game?(track_id:, game:)
@@ -44,7 +45,7 @@ class User < ApplicationRecord
 
     if choice.decoy == false
       base_points = 100
-      base_time_points = 100
+      base_time_points = 50
 
       time_bonus_points = 0
       if seconds_to_pick < Room.show_results_time.to_i

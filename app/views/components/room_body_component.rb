@@ -11,7 +11,7 @@ class RoomBodyComponent < ApplicationComponent
   end
 
   def template
-    div class: "border-solid border-2 border-gray-900 p-2 mb-2", id: "room-body" do
+    div class: "card bg-base-100 rounded-t-none border-2 border-base-200 p-5 mb-2", id: "room-body" do
       case @state
       when :waiting
         plain ""

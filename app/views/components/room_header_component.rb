@@ -8,14 +8,14 @@ class RoomHeaderComponent < ApplicationComponent
   end
 
   def template
-    div class: "flex border-solid border-2 border-gray-900 p-2 mb-2", id: "room-header" do
+    div class: "card bg-base-200 items-center flex flex-row px-4 py-2 rounded-b-none", id: "room-header" do
       case @state
       when :waiting, :finished
-        p { "waiting players" }
+        span(class: "font-semibold") { "waiting players" }
         if @room.owner == helpers.logged_user
           div class: "ml-auto", id: "start-button" do
             button(
-              class: "btn",
+              class: "btn btn-primary btn-sm",
               data: {reflex: "click->RoomReflex#start_game"}
             ) { "start game" }
           end
@@ -36,7 +36,7 @@ class RoomHeaderComponent < ApplicationComponent
 
         if @room.owner == helpers.logged_user
           button(
-            class: "btn ml-auto",
+            class: "btn btn-primary btn-sm ml-auto",
             data: {reflex: "click->RoomReflex#finish_track_selection"}
           ) { "finish track selection" }
         end
@@ -58,7 +58,7 @@ class RoomHeaderComponent < ApplicationComponent
           span(
             data: {
               controller: "timer",
-              timer_duration_value: 30,
+              timer_duration_value: Room.track_guess_time.seconds.to_i,
               timer_callback_reflex_value: "RoomReflex#advance_turn"
             }
           ) { "" }

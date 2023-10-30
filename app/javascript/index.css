@@ -2,30 +2,30 @@
 @tailwind components;
 @tailwind utilities;
 
-button {
-  @apply border-solid border-2 border-gray-500 !important;
-}
-
-.btn {
-  @apply rounded bg-blue-300 p-2;
-}
-
+/* button { */
+/*   @apply border-solid border-2 border-gray-500 !important; */
+/* } */
+/*  */
+/* .btn { */
+/*   @apply rounded bg-blue-300 p-2; */
+/* } */
+/*  */
 .header {
-  @apply text-center font-semibold text-3xl mb-5;
+  @apply text-center font-semibold text-3xl mb-10 !important;
 }
 
 .picked {
-  @apply border-solid border-2 border-yellow-500 !important;
+  @apply border-solid border-2 border-white/60 text-white/60 !important;
 }
 
 .pick-result {
-  @apply bg-green-400 !important;
+  @apply bg-success text-success-content !important;
 }
 
 .not-picked {
-  @apply bg-gray-600 !important;
+  @apply btn-disabled !important;
 }
 
 .wrong-pick {
-  @apply bg-red-400 !important;
+  @apply bg-error text-error-content !important;
 }
