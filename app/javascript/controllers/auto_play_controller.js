@@ -8,10 +8,27 @@ export default class extends ApplicationController {
   connect () {
     super.connect()
 
-    this.element.innerHTML = "<audio controls><source src=\"" + this.urlValue + "\"></audio>"
+    var volume = localStorage.getItem("volume");
+    if(volume == null) {
+      localStorage.setItem("volume", 0.5);
+    }
+
+    this.element.innerHTML = "<audio class=\"hidden\" id=\"player\" controls><source src=\"" + this.urlValue + "\"></source></audio>"
+
+    // who cares
+    this.element.innerHTML += "<input id=\"volume\" class=\"w-full range\" data-action=\"change->auto-play#changeVolume\" type=\"range\" min=\"0\" max=\"100\" />"
+
+    document.getElementById("volume").value = volume * 100
 
     var audio_element = this.element.children[0]
     this.playAudio(audio_element)
+
+    document.getElementById("player").volume = volume
+  }
+
+  changeVolume (element) {
+    document.getElementById("player").volume = element.target.value / 100
+    localStorage.setItem("volume", element.target.value / 100);
   }
 
   playAudio (element) {
